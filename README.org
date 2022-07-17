@@ -1,0 +1,382 @@
+* Emacs
+** Doom Emacs
+*** Commands
+**** Start Daemon
+#+begin_src bash
+/usr/bin/emacs --daemon
+#+end_src
+**** Emacsclient
+#+begin_src bash
+
+    emacsclient -c -a 'emacs'
+    -nw to open in terminal
+    +line:column
+#+end_src
+**** Open in Terminal
+#+begin_src bash
+emacs -nw
+#+end_src
+**** Set Window Title
+#+begin_src bash
+emacs --name="Tool of Gods"
+#+end_src
+**** Open Maximized
+#+begin_src bash
+emacs -mm
+#+end_src
+**** Open File
+#+begin_src bash
+emacs --file=path
+#+end_src
+**** Open on line & Column
+#+begin_src bash
+emacs --file=path +45         #line
+emacs --file=path +33:12      #line:column
+#+end_src
+*** Dired
+spc+. to open dired
+( to switch view modes
+return to go to a directory
+: - to go back (ignore :)
+: + to create a directory (ignoring :)
+d to mark for delete
+x to delete marked items
+o to sort by name or date
+M to modify permissions (eg. u+wr)
+O to change owner
+*/ to sellect all files or directories (t to toggle between)
+U to unsellect all
+m to sellect
+u to unsellect
+t to invert selection
+ctrl+w v to split vertocally
+C to copy to other window(directory)
+R to cut to other window(directory)
+i to rename
+*** Buffers
+spc+b+i to list buffers
+spc+b+n to go to next buffer
+spc+b+p to go to previous buffer
+*** Windows
+ctrl+w v to split vertically
+ctrl+w s to split horizontally
+ctrl+w w to switch between windows
+ctrl+w c to delete window
+ctrl+w num to go to num window
+ctrl+w < to increase size (vertically)
+ctrl+w > to decrese size (vertically)
+ctrl+w = to make same size
+ctrl+w - to make smaller(horizontally)
+ctrl+w + to make bigger(horizontally)
+*** Workspaces
+spc+tab+n to create new workspace
+spc+tab+d to delete new workspace
+spc+tab+num to go to num workspace
+spc+tab+[ to go to previous workspace
+spc+tab+] to go to next workspace
+*** Shortcuts
+spc+t+F to make buffer fulscreen
+spc+t+m to toggle minimap
+spc+q+q to quit emacs (K to kill)
+spc+q+r to restore emacs (R to restart)
+spc+q+s to save session (S to save as)
+spc+q+l to restore session (L to restore from file)
+spc+f+d to find a directory
+spc+f+f to find a file
+spc+f+r to find recent files
+spc+f+R to rename(move) file
+spc+f+s to save file (S to save as)
+spc+f+U to sudo file
+spc+f+C to copy file
+spc+f+D to delete file
+spc+f+y to copy file
+spc+i to insert various things
+spc+p+a to add new project
+spc+p+d to delete project
+spc+p+p to switch between projects
+alt+! to execute shell command
+
+*** Custom Shortcut
+:LOGBOOK:
+CLOCK: [2022-06-22 Wed 01:51]
+:END:
+#+begin_src emacs-lisp
+  (map! :leader
+        (:prefix ("z" . "zombie")
+         :desc "Something about zombies"
+         "k" #'kill-kombies))
+#+end_src
+
+another example
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Search web for text between BEG/END"
+      "s" #'eww-search-words
+#+end_src
+
+another example
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Comment or uncomment lines" "TAB TAB" #'comment-line
+      (:prefix ("t" . "toggle")
+       :desc "Toggle line numbers" "l" #'doom/toggle-line-numbers
+       :desc "Toggle line highlight in frame" "h" #'hl-line-mode
+       :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
+       :desc "Toggle truncate lines" "t" #'toggle-truncate-lines))
+#+end_src
+*** Magit
+spc+g+g to open magit
+? to view shortcuts
+** Programming in ORG MODE
+#+TITLE: Some Title
+#+PROPERTY: header-args :tangle code.py :mkdirp yes
+
+org-babel-tangle to convert to .org to .py
+
+<s tab to create source block # doom emacs only
+
+#+BEGIN_SRC python
+  x = "egr"
+  return  x
+#+END_SRC
+
+ctrl+c ctrl+c to execute code
+
+#+RESULTS:
+: egr
+
+
+
+#+BEGIN_SRC bash :tangle ~/path/to/file :mkdirp yes
+
+
+#+END_SRC
+
+** Website in Org
+#+TITLE: Org to HTML
+#+DESCRIPTION: Convert Org to HTML & use Custom CSS
+#+AUTHOR: Safwan Nayeem
+#+EXPORT_FILE_NAME: /home/safwan/Desktop/Org.html
+# ##+HTML_HEAD: <link rel="stylesheet" type="text/css" href="path/to/css">
+# #+SETUPFILE: https://raw.githubusercontent.com/fniessen/org-html-themes/master/org/theme-readtheorg.setup
+
+some org text
+org-export-dispatcher
+
+** Org Basics
+*** Attributes
+#+TITLE:       the title to be shown (default is the buffer name)
+#+AUTHOR:      the author (default taken from user-full-name)
+#+DATE:        a date, an Org timestamp120, or a format string for format-time-string
+#+EMAIL:       his/her email address (default from user-mail-address)
+#+DESCRIPTION: the page description, e.g. for the XHTML meta tag
+#+KEYWORDS:    the page keywords, e.g. for the XHTML meta tag
+#+LANGUAGE:    language for HTML, e.g. ‘en’ (org-export-default-language)
+#+TEXT:        Some descriptive text to be inserted at the beginning.
+#+TEXT:        Several lines may be given.
+#+OPTIONS:     H:2 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t ...
+#+BIND:        lisp-var lisp-val, e.g.: org-export-latex-low-levels itemize
+               You need to confirm using these, or configure org-export-allow-BIND
+#+LINK_UP:     the ``up'' link of an exported page
+#+LINK_HOME:   the ``home'' link of an exported page
+#+LATEX_HEADER: extra line(s) for the LaTeX header, like \usepackage{xyz}
+#+EXPORT_SELECT_TAGS:   Tags that select a tree for export
+#+EXPORT_EXCLUDE_TAGS:  Tags that exclude a tree from export
+#+XSLT:        the XSLT stylesheet used by DocBook exporter to generate FO file
+*** List
++ jdsvjsbv
++ dngverdv
++ dvnsdv
+
+- dvhskjd
+- vreb
+- erberb
+
+1. vfdf
+2. ervf
+3. ergre
+
+1) fvdb
+2) dfvbdf
+
+*** Headings
+astrixs "*" to create levels (Headings)
+tab to fold or unfold
+shift+tab to fold or unfold entire document
+*** Keybindings
+alt+enter to create same item
+alt+(left,right) or (h,l) to change heading level
+alt+(up,down) or (k,j) to move heading with childs
+alt+sgift+(up,down) or (k,j) to move heading without childs
+*** Todo
+**** TODO hhhh
+**** DONE kj
+CLOSED: [2022-07-05 Tue 16:31]
+**** TODO n
+**** TODO j
+*** Scheduling
+SCHEDULED: <2022-06-26 Sun>
+spc+m+d+s to schedule something
+shift+arrow to move
+*** Checkbox [1/3] or [33%]
++ [ ] Item yet to be done.
++ [X] Item that has been done.
++ [-] Item that has been semi done.
+*** Table
+|----------------+-----------+-----------+-------|
+| Country        | Abstracts | Downloads | Ratio |
+|----------------+-----------+-----------+-------|
+| United States  |         7 |       497 |  71.0 |
+| Unknown        |         4 |        83 |  20.8 |
+| United Kingdom |         3 |        41 |  13.7 |
+| Germany        |         3 |        29 |   9.7 |
+| Netherlands    |         2 |        21 |  10.5 |
+| Japan          |         1 |        18 |  18.0 |
+|----------------+-----------+-----------+-------|
+pipe character tocreate table
+tab to resize
+spc+m+b+- to create header line
+*** Formatting
+    *bold*
+    /italic/
+    _underlined_
+    =code=
+    ~verbatim~
+    +strike-through+
+
+*** Comments
+# to comment line
+*** Links
+[[Programming in ORG MODE][Go To]]
+[[https://www.google.com][Google]]
+https://www.bing.org
+*** Blocks
+< and than (character) tab
+s    #+begin_src ... #+end_src
+e    #+begin_example ... #+end_example
+q    #+begin_quote ... #+end_quote
+v    #+begin_verse ... #+end_verse
+c    #+begin_center ... #+end_center
+l    #+begin_latex ... #+end_latex
+L    #+latex:
+h    #+begin_html ... #+end_html
+H    #+html:
+a    #+begin_ascii ... #+end_ascii
+A    #+ascii:
+i    #+index: line
+I    #+include: line
+*** No Formatting
+: Text to be displayed verbatim (as-is), without markup
+: (*bold* does not change font), e.g., for source code.
+: Line breaks are respected.
+*** Pictures
+#+CAPTION: This is the caption for the next figure link
+#+NAME:   fig:1234
+[[file:~/Desktop/gtk/code-examples/gtk-with-python/image1.png]]
+** VIM
+*** Basics
+h j k l to go left down up and right respectively
+:q :q!(ZQ) :x (wq) :wq(ZZ) to quit , quit without saving, write and quit and quit
+i & I to enter insert mode & insert mode ignoring blank space
+a & a to go to the end of word & line and insert
+s & S to delete character and line under cursor and insert mode
+o & O to insert mode after and before line(in visual mode swap cursor position at start & end)
+gg & G to go to the top & bottom of the document respectively
+escape to exit any mode
+v & V to enter visual character & Visual line mode respectively
+0 & $ to go to the first & last character of the line
+^ or 0w to go to the first non blank character 
+x(dl) & X to delete the character under cursor & before cursor
+u to undo 
+ctrl+r to redo
+dw to delete(cut) a word
+dd to delete(cut) a line
+d to delete from cursor to end of line
+w to jump to the first character of the next word
+e to jump to the last character of the next word
+b to jump to the first character of the last word
+ge to jump to the last character of the last word
+w E B gE same thing but ignores special characters as part of words
+f to find character in line ; to continue
+f to f but in backwards
+yy & yw to copy line & word
+p & P to paste below and above
+r & R to repalce the character under cursor & continuous with the folloeing character
+c to delete from cursor to end and insert
+cx x=(w, e, b, d) to delete and insert
+cc to change line
+/ & ? to find a word & in reverse and n & N to navigate
+:%s/x/y/g to replace x with y
+:%s/x/y/gc to replace x with y with prompt
+:3,9s/x/y/g to replace x with y in between line 3 and 9
+{ & } go to previous or next code block(paragraphs)
+:x , xG & xgg to go to line x
+% to find matching bracket
+# & * to find other instances (before & after) of highlighted word
+zz, zt & zb to center, top & bottom cursor on screen
+h, M & L to move cursor to top, middle & bottom of screen
+~ , gU & gu to swap case, uppercase & lowercase of highlighted character
+gUU & guu to uppercase & lowercase line
+<< & >> to unindent and indent
+>% to indent block
+ctrl+v to select columns
+qx commands q to set macro to x key and @x to perform macro
+J to join line below with a space (gJ to do without space)
+:read !x or :.!x to insert output of command x in the next line you are currently on
+:g/pattern/cmd to perform command cmd on matched lines (eg. :g/import/d to delete all lines that have import in them)
+:g!/pattern/cmd or :v/pattern/cmd to perform command cmd on unmatched lines (eg. :g/import/d to delete all lines that doesnt have import in them)
+:ab x y to set an abbreviation of y as x (ctrl+v to not expand)
+:dig to find diagraphs & ctrl+v and code or ctrl+k and nearest characters to type it
+g= or g- to increment or decrement numbers (which is followed by ctrl+v and selected column of number)
+mx to mark selected character(line) & 'x or `x to go to marked line or character
+dmx to unmark x
+gv Reselecting previous selected text.
+:earlier xm to go back x minuites (m, s, h)
+:later xm to go forward x minuites (m, s, h)
+x% to go to x persent
+gt & gT to go to next & previous tab
+ctrl+o to access vim movement keys in insert mode once
+shift+k on any word to describe that (eg. shell command)
+ctrl+U & ctrl+D to scroll up & down half of screen
+ctrl+E & ctrl+Y to scroll up & down a line
+ctrl+F & ctrl+B to scroll up & down full screen
+ctrl+O & ctrl+I to go back and forth between positions
+/\</x & /x/> /\</x/> to find x at begining & end or only x (word)
+/^x & /x& to find x at begining & end of sentence
+/^x$ to find x in a line where x is the only word
+.*[]^%/\?~$ put \ to ignore these characters
+daw or caw to perform dw or cw from middle of a word
+(a, i)(w, s, p, b, t, [, <, ', ", `) to perform varius actions to or inner a (word, sentence, paragraph, tag, [], <>, '', "", ``)
+**** Command Mode
+ctrl+w to delete a word
+ctrl+u to clear
+
+*** Useful Commands
+ddp to swap current line with next line
+xp to swap characters
+V then select lines and then :...!sort to sort selected lines alphabetically
+V then select lines and then :...!column --table -s "x" to format code in columns minding x as field seperator
+:g/^/m0
+:!!sh on selected text to swap the text with output of the command
+:g/^\s*$/d to delete every blank line
+:noh to romove highlights after search
+/x\+ y to search for "x y"
+# * to find highlighted word (ignoring #)
+ggVG to highlight entire document
+:%s/\s\+$// to trim tabs at end
+*** Useful Macros
+
+*** Useful features
+**** Duplicate selection
+ y p
+**** Multiple Cursors
+:PROPERTIES:
+:ID:       77cef54a-aaca-4152-a6d6-bbe228ca4fa7
+:END:
+g z z at multiple places to insert multiple cursors (a to insert at the end)
+
+**** Commenting
+gcc to comment or uncomment selected code
+**** Abbreviation
+ctrl+x a g to set an abbreviation for highlighted text
+ctrl+x ' to expand abbreviation
